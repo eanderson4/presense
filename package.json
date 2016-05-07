@@ -1,0 +1,21 @@
+{
+  "name": "presense",
+  "version": "0.1.1",
+  "description": "Create and operate Firebase presense system.",
+  "author": "Eric Anderson <ericjanderson4@gmail.com>",
+  "main": "./wrap.js",
+  "keywords": [
+    "presense",
+    "firebase"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "budget-text": "git+https://github.com/eanderson4/budget-text.git",
+    "chance": "~1.0.3",
+    "firebase": "^2.4.2",
+    "lodash": "^4.11.2",
+    "logzio-nodejs": "^0.3.8",
+    "plivo": "^0.3.3",
+    "winston": "^2.2.0"
+  }
+}
