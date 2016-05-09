@@ -29,6 +29,9 @@ var logger = new (winston.Logger)({
             ]
         });
 
+var Logsene = require('logsene-js')
+var logse =  new Logsene ('75051c1b-9363-469e-87ef-472d0eb79acc')
+
 var logzio_level = "info";
 
 logger.log = function(){
@@ -52,6 +55,7 @@ logger.log = function(){
     });
 
     logzio.log(obj);
+    logse.log(level,obj.message,obj);
   }
 
   //Finish log call

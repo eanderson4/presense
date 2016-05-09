@@ -27,7 +27,7 @@ var config = {
   "service_name": "plivo_fire",
   "version": "0.1.1"
 }
-module.exports.config = config;
+module.exports.meta = config;
 
 var logger;
 var prefix;
