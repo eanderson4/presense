@@ -1,0 +1,30 @@
+/* ************ Base Presense Template **************** */
+
+module.exports = {
+  mount: mount,
+  meta: {
+    "service_name": "example_fire",
+    "version": "0.1.1"
+  }
+}
+
+var logger;
+var prefix;
+
+
+function mount(tools){
+  logger = tools.logger;
+  prefix = tools.prefix;
+
+  // Test tool transfer
+  logger.info("Testing logger.");
+
+  // Tell presense I'm starting
+  tools.starting();
+
+  second_function();
+}
+
+function second_function(){
+  logger.info("Second Function");
+}
