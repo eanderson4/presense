@@ -3,7 +3,8 @@
   "version": "0.1.2",
   "description": "Create and operate Firebase presense system.",
   "author": "Eric Anderson <ericjanderson4@gmail.com>",
-  "main": "./presense-wrap.js",
+  "main": "./wrap.js",
+  "bin": { "wrap" : "./wrap.js" },
   "keywords": [
     "presense",
     "firebase"

@@ -66,7 +66,7 @@ logger.log = function(){
 var company = "budget-text";
 var host_name = "eric-base";
 var app = 'presense';
-var service_name = 'plivo_fire';
+var service_name = process.argv[2];
 var meta = {
   company: company,
   host_name: host_name,
@@ -95,7 +95,7 @@ var presense = {
 
 //Logger
 var prefix = "[ "+[company,service_name].join(" ][ ") +" ]";
-logger.info("Attempting to start");
+logger.info("Attempting to start",service_name);
 
 //Company firebase systems
 var companyRef = new Firebase("https://presense.firebaseio.com/"+company);
@@ -107,6 +107,10 @@ var tools = {
   starting: starting,
   prefix: prefix,
   logger: logger
+}
+
+module.exports = {
+  attemptToMount: attemptToMount
 }
 
 // Register Service
@@ -128,7 +132,7 @@ function attemptToMount(){
       // Inject Service and mount;
       service = require("./"+service_name+".js");
       service.mount(tools);
-      presense.meta.service_name = service_name+":"+service.config.version;
+      presense.meta.service_name = service_name+":"+service.meta.version;
 
     }
     else{
