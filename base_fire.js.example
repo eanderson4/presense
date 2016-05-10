@@ -1,16 +1,29 @@
 /* ************ Base Presense Template **************** */
 
+/* ******** Initialization *********************** */
+/* Initialize module                               */
+
+
+/* ******** Export Module ************************ */
+/* Must include mount function and basic meta data */
+
 module.exports = {
   mount: mount,
+  config: {
+    "timeout": 5000
+  },
   meta: {
     "service_name": "example_fire",
-    "version": "0.1.1"
+    "version": "0.1.2"
   }
 }
 
 var logger;
 var prefix;
 
+
+/* ***************** Service Entry Point *************** */
+/* This will be the primary entry point into the service */
 
 function mount(tools){
   logger = tools.logger;
@@ -24,6 +37,10 @@ function mount(tools){
 
   second_function();
 }
+
+
+/* **************** Internal Functions ****************** */
+/* Here is where internal functions can be placed         */
 
 function second_function(){
   logger.info("Second Function");

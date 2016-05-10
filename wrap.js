@@ -133,6 +133,7 @@ function attemptToMount(){
       service = require("./"+service_name+".js");
       service.mount(tools);
       presense.meta.service_name = service_name+":"+service.meta.version;
+      startup_time = service.config.startup_time || 10000;
 
     }
     else{
