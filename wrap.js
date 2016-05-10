@@ -66,7 +66,9 @@ logger.log = function(){
 var company = "budget-text";
 var host_name = "eric-base";
 var app = 'presense';
-var service_name = process.argv[2];
+var service_name = process.argv[2].split(".")[0];
+var service_ext = process.argv[2].split(".")[1];
+
 var meta = {
   company: company,
   host_name: host_name,
