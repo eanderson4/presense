@@ -7,6 +7,7 @@ var winston = require("winston");
 var Chance = require('chance'),
     chance = new Chance();
 var _ = require('lodash');
+var moment = require('moment-timezone');
 
 /*var logzioWinstonTransport = require('winston-logzio');
 var loggerOptions = {
@@ -108,7 +109,10 @@ var tools = {
   startup: startup,
   starting: starting,
   prefix: prefix,
-  logger: logger
+  logger: logger,
+  config: {
+    startup_time: startup_time
+  }
 }
 
 module.exports = {
@@ -131,17 +135,20 @@ function attemptToMount(){
       }
       logger.info("No service detected, Mount");    
 
-      // Inject Service and mount;
-      service = require("./"+service_name+".js");
-      service.mount(tools);
-      presense.meta.service_name = service_name+":"+service.meta.version;
+      // Inject Service
+      service = require("./"+service_name+".js");      
 
+      // Load Service Data
+      presense.meta.service_name = service_name+":"+service.meta.version;
       if(_.has(service,'config.startup_time')){
-        startup_time = service.config.startup_time
-        }
-        else{
-          startup_time = 10000;
-        } 
+        tools.config.startup_time = service.config.startup_time
+      }
+      else{
+        tools.config.startup_time = 10000;
+      } 
+
+      // Mount Service
+      service.mount(tools);
 
     }
     else{
@@ -189,12 +196,12 @@ process.on('unhandledRejection', function(reason, p) {
 
 function startTimer(){
   setTimeout(function(){
-    logger.info("Startup over.");
+    logger.info("Startup over after",tools.config.startup_time,"ms.");
     tools.startup=false;
     presense.startup=false;
     serviceRef.child("mount").update(presense);
     check_host_key();
-  },startup_time);
+  },tools.config.startup_time);
 }
 
 function starting(){
@@ -229,7 +236,7 @@ function starting(){
 function ping(){
   setInterval(function(){
     logger.debug("Tick");
-    serviceRef.child("mount").update({"message": "I'm Heree!!"});
+    serviceRef.child("mount").update({"message": "I'm Heree!!", "time":moment().format()});
     check_host_key();
   },ping_time);
 }

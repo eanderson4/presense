@@ -10,7 +10,7 @@
 module.exports = {
   mount: mount,
   config: {
-    "timeout": 5000
+    "startup_time": 5000
   },
   meta: {
     "service_name": "example_fire",
@@ -19,7 +19,6 @@ module.exports = {
 }
 
 var logger;
-var prefix;
 
 
 /* ***************** Service Entry Point *************** */
@@ -27,7 +26,6 @@ var prefix;
 
 function mount(tools){
   logger = tools.logger;
-  prefix = tools.prefix;
 
   // Test tool transfer
   logger.info("Testing logger.");
@@ -36,6 +34,12 @@ function mount(tools){
   tools.starting();
 
   second_function();
+
+  logger.debug("Check Startup",tools.startup);
+  setTimeout(function(){
+    logger.debug("Check Startup",tools.startup);
+  },13000);
+
 }
 
 
